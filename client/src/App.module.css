@@ -1,0 +1,21 @@
+.app {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  text-align: center;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid grey;
+}
+
+.card {
+  padding: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: inherit;
+  background: none;
+  border-bottom: 1px solid grey;
+}
