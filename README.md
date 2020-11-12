@@ -50,7 +50,7 @@ Build a frontend component that displays information from the /nodes endpoint ac
 
 - [ ] Build an interactive frontend component that renders the content using template strings.
 
-- [ ]Variables are represented inside of `node` content as a template string `{<idOfTheVariable>|a fallback value}`
+- [ ] Variables are represented inside of `node` content as a template string `{<idOfTheVariable>|a fallback value}`
 
 - [ ] When displaying a variable, make sure to show that it's a variable value. In the image below, we can see how the variables should look embedded in text.
 
