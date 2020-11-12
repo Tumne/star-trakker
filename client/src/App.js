@@ -4,12 +4,12 @@ import Connections from './components/Connections';
 
 const App = () => {
   const [nodes, setNodes] = useState([]);
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const response = await fetch('http://localhost:5000/nodes');
-      const data = await response.json();
-      setNodes(data);
+      setNodes(await response.json());
     };
     getData();
   }, []);
@@ -17,7 +17,16 @@ const App = () => {
   return (
     <div className={styles.app}>
       <div className={styles.list}>
-        <Connections connections={nodes} list={nodes} />
+        <Connections
+          connections={nodes}
+          list={nodes}
+          setContent={(content) => setContent(content)}
+        />
+      </div>
+      <div className={styles.details}>
+        {content.map(({ body }) => (
+          <p>{body}</p>
+        ))}
       </div>
     </div>
   );

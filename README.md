@@ -30,13 +30,13 @@ Your application should look something like the sketch below.
 
 Build a frontend component that displays information from the /nodes endpoint according to the specification outlined in the design documents.
 
-- [ ] When you click on an item in the list view on the left side of the app, a space between that cell and the cell beneath it should show that `node`s `connections`.
+- [x] When you click on an item in the list view on the left side of the app, a space between that cell and the cell beneath it should show that `node`s `connections`.
 
-- [ ] You should then be able to click on the `node`s to reveal their `connections` as well, if they exist that is.
+- [x] You should then be able to click on the `node`s to reveal their `connections` as well, if they exist that is.
 
-- [ ] When you click on a diferent item in the list, it should close the connections that you are viewing and open up the connections for the node that you have clicked on.
+- [x] When you click on a diferent item in the list, it should close the connections that you are viewing and open up the connections for the node that you have clicked on.
 
-- [ ] Any time you click on a node, it should display all of the content in the Detail View on the right side of the page.
+- [x] Any time you click on a node, it should display all of the content in the Detail View on the right side of the page.
 
 ### Challenge 2
 

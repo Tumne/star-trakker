@@ -1,14 +1,15 @@
 import { Fragment, useState } from 'react';
 import styles from './Connections.module.css';
 
-const Connections = ({ connections, list }) => {
+const Connections = ({ connections, list, setContent }) => {
   const [nodes, setNodes] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
 
   const getData = async (selectedId) => {
     const response = await fetch(`http://localhost:5000/nodes/${selectedId}`);
-    const data = await response.json();
-    const resData = data[0].connections;
+    const data = (await response.json())[0];
+    setContent(data.content);
+    const resData = data.connections;
     setNodes(
       resData
         ? resData.map((connectionId) => list.find((o) => o.id === connectionId))
@@ -22,8 +23,13 @@ const Connections = ({ connections, list }) => {
         <button
           className={styles.card}
           onClick={async () => {
-            setSelectedNodeId(selectedNodeId === id ? '' : id);
-            getData(id);
+            setNodes([]);
+            if (selectedNodeId === id) {
+              setSelectedNodeId('');
+            } else {
+              setSelectedNodeId(id);
+              getData(id);
+            }
           }}
         >
           {title}
@@ -31,7 +37,11 @@ const Connections = ({ connections, list }) => {
       </li>
       {selectedNodeId === id && nodes.length ? (
         <ul>
-          <Connections connections={nodes} list={list} />
+          <Connections
+            connections={nodes}
+            list={list}
+            setContent={setContent}
+          />
         </ul>
       ) : null}
     </Fragment>
