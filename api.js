@@ -1,7 +1,9 @@
 const sqlite3 = require('sqlite3').verbose();
 var express = require('express');
+var cors = require('cors');
 
 var app = express();
+app.use(cors());
 app.use(express.json());
 
 let db = new sqlite3.Database('./database.db');
