@@ -3,6 +3,10 @@
   border-bottom: 1px solid grey;
 }
 
+.active {
+  background: pink;
+}
+
 .card {
   padding: 20px;
   border: none;

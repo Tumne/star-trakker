@@ -1,11 +1,15 @@
 import { Fragment, useState } from 'react';
+import classnames from 'classnames';
 import styles from './Connections.module.css';
 
-const Connections = ({ connections, list, setContent }) => {
+const Connections = ({ connections, list, setContent, setActiveId }) => {
   const [nodes, setNodes] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
 
-  const getData = async (selectedId) => {
+  const handleOnClick = async (selectedId) => {
+    setNodes([]);
+    setSelectedNodeId(selectedId);
+
     const response = await fetch(`http://localhost:5000/nodes/${selectedId}`);
     const data = (await response.json())[0];
     setContent(data.content);
@@ -19,19 +23,13 @@ const Connections = ({ connections, list, setContent }) => {
 
   return connections.map(({ id, title }) => (
     <Fragment key={id}>
-      <li className={styles.li}>
-        <button
-          className={styles.card}
-          onClick={async () => {
-            setNodes([]);
-            if (selectedNodeId === id) {
-              setSelectedNodeId('');
-            } else {
-              setSelectedNodeId(id);
-              getData(id);
-            }
-          }}
-        >
+      <li
+        className={classnames(
+          styles.li,
+          selectedNodeId === id && styles.active
+        )}
+      >
+        <button className={styles.card} onClick={async () => handleOnClick(id)}>
           {title}
         </button>
       </li>
