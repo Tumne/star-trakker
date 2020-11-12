@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react';
 import classnames from 'classnames';
 import styles from './Connections.module.css';
 
-const Connections = ({ connections, list, setContent, setActiveId }) => {
+const Connections = ({ connections, list, setContent }) => {
   const [nodes, setNodes] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
 

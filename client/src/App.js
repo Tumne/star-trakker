@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from './App.module.css';
 import Connections from './components/Connections';
+import { sanitize } from 'dompurify';
+import Search from './components/Search';
 
 const App = () => {
   const [nodes, setNodes] = useState([]);
   const [content, setContent] = useState([]);
+  const [html, setHtml] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -17,15 +20,19 @@ const App = () => {
   return (
     <div className={styles.app}>
       <div className={styles.list}>
+        <Search content={content} onChange={setHtml} />
         <Connections
           connections={nodes}
           list={nodes}
-          setContent={(content) => setContent(content)}
+          setContent={(content) => {
+            setHtml(content);
+            setContent(content);
+          }}
         />
       </div>
       <div className={styles.details}>
-        {content.map(({ body }, index) => (
-          <p key={index}>{body}</p>
+        {html.map(({ body }, index) => (
+          <p key={index} dangerouslySetInnerHTML={{ __html: sanitize(body) }} />
         ))}
       </div>
     </div>
