@@ -24,8 +24,8 @@ const App = () => {
         />
       </div>
       <div className={styles.details}>
-        {content.map(({ body }) => (
-          <p>{body}</p>
+        {content.map(({ body }, index) => (
+          <p key={index}>{body}</p>
         ))}
       </div>
     </div>
