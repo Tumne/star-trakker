@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const Search = ({ content, onChange }) => {
+const Search = ({ content, setHtml, setConnections }) => {
   const [searchString, setSearchString] = useState();
 
   useEffect(() => {
@@ -22,11 +22,33 @@ const Search = ({ content, onChange }) => {
           : null,
       }));
     }
-    onChange(newHtml);
-  }, [searchString, content, onChange]);
+    setHtml(newHtml);
+  }, [searchString, content, setHtml]);
 
   return (
-    <input type="text" onChange={(e) => setSearchString(e.target.value)} />
+    <input
+      type="text"
+      onChange={async (e) => {
+        const { value } = e.target;
+        setSearchString(e.target.value);
+
+        if (value) {
+          const response = await fetch('http://localhost:5000/nodes/search', {
+            method: 'post',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              query: e.target.value,
+            }),
+          });
+          setConnections(await response.json());
+        } else {
+          setConnections(null);
+        }
+      }}
+    />
   );
 };
 
