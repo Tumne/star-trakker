@@ -40,11 +40,11 @@ Build a frontend component that displays information from the /nodes endpoint ac
 
 ### Challenge 2
 
-- [ ] Build an interactive frontend component that works with the /search end point and displays results as outlined in the design documents.
+- [x] Build an interactive frontend component that works with the /search end point and displays results as outlined in the design documents.
 
-- [ ] In the detail view, make sure to **highlight** the search terms in the text if it's in the answer's content.
+- [x] In the detail view, make sure to **highlight** the search terms in the text if it's in the answer's content.
 
-- [ ] _Users may have input unsafe strings to try to expose XSS vulnerabilities in our application. Make sure to render highlights and other strings in a safe and secure way._
+- [x] _Users may have input unsafe strings to try to expose XSS vulnerabilities in our application. Make sure to render highlights and other strings in a safe and secure way._
 
 ### Challenge 3
 
