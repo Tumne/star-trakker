@@ -25,28 +25,31 @@ const Search = ({ content, setHtml, setConnections }) => {
     setHtml(newHtml);
   }, [searchString, content, setHtml]);
 
+  const fetchSearch = async (value) => {
+    if (value) {
+      const response = await fetch('http://localhost:5000/nodes/search', {
+        method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: value,
+        }),
+      });
+      setConnections(await response.json());
+    } else {
+      setConnections(null);
+    }
+  };
+
   return (
     <input
       type="text"
       onChange={async (e) => {
         const { value } = e.target;
-        setSearchString(e.target.value);
-
-        if (value) {
-          const response = await fetch('http://localhost:5000/nodes/search', {
-            method: 'post',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              query: e.target.value,
-            }),
-          });
-          setConnections(await response.json());
-        } else {
-          setConnections(null);
-        }
+        setSearchString(value);
+        fetchSearch(value);
       }}
     />
   );

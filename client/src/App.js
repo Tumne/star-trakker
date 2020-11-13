@@ -5,6 +5,7 @@ import { sanitize } from 'dompurify';
 import Search from './components/Search';
 
 const App = () => {
+  const [variables, setVariables] = useState([]);
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
   const [content, setContent] = useState([]);
@@ -18,7 +19,27 @@ const App = () => {
       setConnections(data);
     };
     getData();
+
+    const getVariables = async () => {
+      const response = await fetch('http://localhost:5000/variables');
+      const data = await response.json();
+      setVariables(data);
+    };
+
+    getVariables();
   }, []);
+
+  const bracketsToTags = (item) => {
+    const { body } = item;
+    const source = 'Lorem [ipsum] dolor [sit] amet';
+    const reg = /\{(.+?)\}/;
+
+    return (body || source).replace(new RegExp(reg, 'g'), (_, str) => {
+      const [id, fallback] = str.split('|');
+      const tag = variables.find((v) => v.id === id);
+      return tag ? `<span>${tag.name}</span>` : fallback;
+    });
+  };
 
   return (
     <div className={styles.app}>
@@ -42,9 +63,16 @@ const App = () => {
         )}
       </div>
       <div className={styles.details}>
-        {html.map(({ body }, index) => (
-          <p key={index} dangerouslySetInnerHTML={{ __html: sanitize(body) }} />
-        ))}
+        {html.map((item, index) => {
+          return (
+            <p
+              key={index}
+              dangerouslySetInnerHTML={{
+                __html: sanitize(bracketsToTags(item)),
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

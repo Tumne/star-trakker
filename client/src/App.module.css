@@ -9,3 +9,8 @@
   flex-direction: column;
   border-top: 1px solid grey;
 }
+
+span {
+  background: lightgrey;
+  padding: 4px;
+}
