@@ -7,10 +7,20 @@
 .list {
   display: flex;
   flex-direction: column;
-  border-top: 1px solid grey;
 }
 
 span {
   background: lightgrey;
   padding: 4px;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid grey;
+
+  > li {
+    border-bottom: 1px solid grey;
+  }
 }

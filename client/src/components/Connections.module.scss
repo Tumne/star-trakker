@@ -1,17 +1,19 @@
 .li {
   text-align: left;
-  border-bottom: 1px solid grey;
 }
 
-.active {
-  background: pink;
+.ul {
+  list-style-type: none;
+  padding-left: 20px;
 }
 
 .card {
+  width: 100%;
   padding: 20px;
   border: none;
   outline: none;
   cursor: pointer;
   color: inherit;
   background: none;
+  text-align: left;
 }

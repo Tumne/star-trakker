@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import classnames from 'classnames';
-import styles from './Connections.module.css';
+import styles from './Connections.module.scss';
 
 const Connections = ({ connections, list, onClick }) => {
   const [nodes, setNodes] = useState([]);
@@ -24,18 +24,13 @@ const Connections = ({ connections, list, onClick }) => {
 
   return connections.map(({ id, title }) => (
     <Fragment key={id}>
-      <li
-        className={classnames(
-          styles.li,
-          selectedNodeId === id && styles.active
-        )}
-      >
+      <li className={classnames(styles.li)}>
         <button className={styles.card} onClick={async () => handleOnClick(id)}>
           {title}
         </button>
       </li>
       {selectedNodeId === id && nodes.length ? (
-        <ul>
+        <ul className={styles.ul}>
           <Connections connections={nodes} list={list} onClick={onClick} />
         </ul>
       ) : null}

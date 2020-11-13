@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from './Search.module.scss';
 
 const Search = ({ content, setHtml, setConnections }) => {
   const [searchString, setSearchString] = useState();
@@ -12,6 +13,7 @@ const Search = ({ content, setHtml, setConnections }) => {
         .trim()
         .split(' ')
         .sort((a, b) => b.length - a.length);
+
       newHtml = content.map(({ body, ...rest }) => ({
         ...rest,
         body: body
@@ -44,14 +46,17 @@ const Search = ({ content, setHtml, setConnections }) => {
   };
 
   return (
-    <input
-      type="text"
-      onChange={async (e) => {
-        const { value } = e.target;
-        setSearchString(value);
-        fetchSearch(value);
-      }}
-    />
+    <div className={styles.container}>
+      <input
+        type="text"
+        className={styles.input}
+        onChange={async (e) => {
+          const { value } = e.target;
+          setSearchString(value);
+          fetchSearch(value);
+        }}
+      />
+    </div>
   );
 };
 
