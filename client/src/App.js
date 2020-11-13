@@ -29,16 +29,18 @@ const App = () => {
     getVariables();
   }, []);
 
-  const bracketsToTags = (item) => {
-    const { body } = item;
+  const parseTags = (item) => {
     const source = 'Lorem [ipsum] dolor [sit] amet';
     const reg = /\{(.+?)\}/;
 
-    return (body || source).replace(new RegExp(reg, 'g'), (_, str) => {
-      const [id, fallback] = str.split('|');
-      const tag = variables.find((v) => v.id === id);
-      return tag ? `<span>${tag.name}</span>` : fallback;
-    });
+    return {
+      ...item,
+      body: (item.body || source).replace(new RegExp(reg, 'g'), (_, str) => {
+        const [id, fallback] = str.split('|');
+        const tag = variables.find((v) => v.id === id);
+        return tag ? `<span>${tag.name}</span>` : fallback;
+      }),
+    };
   };
 
   return (
@@ -53,9 +55,10 @@ const App = () => {
           <Connections
             connections={connections}
             list={nodes}
-            setContent={(content) => {
-              setHtml(content);
-              setContent(content);
+            onClick={(content) => {
+              const parsedContent = content.map((o) => parseTags(o));
+              setHtml(parsedContent);
+              setContent(parsedContent);
             }}
           />
         ) : (
@@ -63,13 +66,11 @@ const App = () => {
         )}
       </div>
       <div className={styles.details}>
-        {html.map((item, index) => {
+        {html.map(({ body }, index) => {
           return (
             <p
               key={index}
-              dangerouslySetInnerHTML={{
-                __html: sanitize(bracketsToTags(item)),
-              }}
+              dangerouslySetInnerHTML={{ __html: sanitize(body) }}
             />
           );
         })}

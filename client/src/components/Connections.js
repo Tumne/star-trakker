@@ -2,23 +2,24 @@ import { Fragment, useState } from 'react';
 import classnames from 'classnames';
 import styles from './Connections.module.css';
 
-const Connections = ({ connections, list, setContent }) => {
+const Connections = ({ connections, list, onClick }) => {
   const [nodes, setNodes] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
 
   const handleOnClick = async (selectedId) => {
-    setNodes([]);
     setSelectedNodeId(selectedId);
 
     const response = await fetch(`http://localhost:5000/nodes/${selectedId}`);
-    const data = (await response.json())[0];
-    setContent(data.content);
-    const resData = data.connections;
+    const { content, connections: childNodes } = (await response.json())[0];
+
     setNodes(
-      resData
-        ? resData.map((connectionId) => list.find((o) => o.id === connectionId))
+      childNodes
+        ? childNodes.map((connectionId) =>
+            list.find((o) => o.id === connectionId)
+          )
         : []
     );
+    onClick(content);
   };
 
   return connections.map(({ id, title }) => (
@@ -35,11 +36,7 @@ const Connections = ({ connections, list, setContent }) => {
       </li>
       {selectedNodeId === id && nodes.length ? (
         <ul>
-          <Connections
-            connections={nodes}
-            list={list}
-            setContent={setContent}
-          />
+          <Connections connections={nodes} list={list} onClick={onClick} />
         </ul>
       ) : null}
     </Fragment>
