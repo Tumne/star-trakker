@@ -64,44 +64,51 @@ const App = () => {
       </div>
       <div className={styles.details}>
         <div className={styles.dingbat}>
-          <button
-            className={classnames(theme === '' && styles.active)}
-            onClick={() => setTheme('')}
-          >
-            S
-          </button>
-          <button
-            className={classnames(theme === 'starfleet' && styles.active)}
-            onClick={() => setTheme('starfleet')}
-          >
-            A
-          </button>
-          <button
-            className={classnames(
-              styles.klingonButton,
-              theme === 'klingon' && styles.active
-            )}
-            onClick={() => setTheme('klingon')}
-          >
-            E
-          </button>
-          <button
-            className={classnames(theme === 'vulcan' && styles.active)}
-            onClick={() => setTheme('vulcan')}
-          >
-            K
-          </button>
-          <button
-            className={classnames(theme === 'borg' && styles.active)}
-            onClick={() => setTheme('borg')}
-          >
-            Q
-          </button>
+          <div className={styles.starfleet}>Star trakker</div>
+          <div>
+            <button
+              className={classnames(theme === '' && styles.active)}
+              onClick={() => setTheme('')}
+            >
+              S
+            </button>
+            <button
+              className={classnames(theme === 'starfleet' && styles.active)}
+              onClick={() => setTheme('starfleet')}
+            >
+              A
+            </button>
+            <button
+              className={classnames(
+                styles.klingonButton,
+                theme === 'klingon' && styles.active
+              )}
+              onClick={() => setTheme('klingon')}
+            >
+              E
+            </button>
+            <button
+              className={classnames(theme === 'vulcan' && styles.active)}
+              onClick={() => setTheme('vulcan')}
+            >
+              K
+            </button>
+            <button
+              className={classnames(theme === 'borg' && styles.active)}
+              onClick={() => setTheme('borg')}
+            >
+              Q
+            </button>
+          </div>
         </div>
         <div className={styles.content}>
-          {html.map((args, index) => (
-            <Card key={index} args={args} />
-          ))}
+          {html.length ? (
+            html.map((args, index) => <Card key={index} args={args} />)
+          ) : (
+            <div className={classnames(styles.placeholder, styles.dingbat)}>
+              e
+            </div>
+          )}
         </div>
       </div>
     </div>
