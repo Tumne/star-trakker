@@ -65,6 +65,12 @@ const App = () => {
       <div className={styles.details}>
         <div className={styles.dingbat}>
           <button
+            className={classnames(theme === '' && styles.active)}
+            onClick={() => setTheme('')}
+          >
+            S
+          </button>
+          <button
             className={classnames(theme === 'starfleet' && styles.active)}
             onClick={() => setTheme('starfleet')}
           >

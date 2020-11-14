@@ -1,4 +1,9 @@
 @font-face {
+  font-family: 'Federation';
+  src: local('Federation'), url(./fonts/Federation.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'Starfleet';
   src: local('Starfleet'), url(./fonts/TNG_Title.ttf) format('truetype');
 }
