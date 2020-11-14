@@ -40,6 +40,7 @@ const App = () => {
 
   return (
     <div className={classnames(styles.app, theme && styles[theme])}>
+      <div className={styles.twinkling} />
       <div className={styles.list}>
         <Search
           content={content}

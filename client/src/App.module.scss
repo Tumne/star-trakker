@@ -83,6 +83,7 @@
   flex-direction: column;
   height: 100vh;
   border-right: 1px solid grey;
+  z-index: 2;
 }
 
 span {
@@ -109,6 +110,10 @@ span {
   }
 }
 
+.details {
+  z-index: 2;
+}
+
 .content {
   overflow: scroll;
   height: calc(100vh - 73px);
@@ -120,4 +125,53 @@ span {
   height: calc(100vh - 73px);
   font-size: 150px;
   color: grey;
+}
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-webkit-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-moz-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+@-ms-keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+.twinkling {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  background: transparent
+    url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat
+    top center;
+  z-index: 1;
+
+  -moz-animation: move-twink-back 200s linear infinite;
+  -ms-animation: move-twink-back 200s linear infinite;
+  -o-animation: move-twink-back 200s linear infinite;
+  -webkit-animation: move-twink-back 200s linear infinite;
+  animation: move-twink-back 200s linear infinite;
 }
