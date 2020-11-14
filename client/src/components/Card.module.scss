@@ -1,20 +1,15 @@
-.card,
 .content {
-  padding: 15px;
+  margin: 20px;
+  padding: 20px;
   border: 1px solid gray;
   border-radius: 5px;
-}
 
-.card {
-  margin: 20px;
-
-  p {
-    margin: 0 0 15px;
+  &:not(:first-child) {
+    margin-top: 0;
   }
-}
 
-.content {
   p {
     margin: 0;
+    line-height: 1.5em;
   }
 }

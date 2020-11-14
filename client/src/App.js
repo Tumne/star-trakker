@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './App.module.scss';
+import classnames from 'classnames';
 import Card from './components/Card';
 import Connections from './components/Connections';
 import Search from './components/Search';
@@ -10,6 +11,7 @@ const App = () => {
   const [connections, setConnections] = useState([]);
   const [content, setContent] = useState([]);
   const [html, setHtml] = useState([]);
+  const [theme, setTheme] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -37,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <div className={styles.app}>
+    <div className={classnames(styles.app, theme && styles[theme])}>
       <div className={styles.list}>
         <Search
           content={content}
@@ -61,6 +63,35 @@ const App = () => {
         )}
       </div>
       <div className={styles.details}>
+        <div className={styles.dingbat}>
+          <button
+            className={classnames(theme === 'starfleet' && styles.active)}
+            onClick={() => setTheme('starfleet')}
+          >
+            A
+          </button>
+          <button
+            className={classnames(
+              styles.klingonButton,
+              theme === 'klingon' && styles.active
+            )}
+            onClick={() => setTheme('klingon')}
+          >
+            E
+          </button>
+          <button
+            className={classnames(theme === 'vulcan' && styles.active)}
+            onClick={() => setTheme('vulcan')}
+          >
+            K
+          </button>
+          <button
+            className={classnames(theme === 'borg' && styles.active)}
+            onClick={() => setTheme('borg')}
+          >
+            Q
+          </button>
+        </div>
         {html.map((args, index) => (
           <Card key={index} args={args} />
         ))}

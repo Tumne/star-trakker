@@ -2,6 +2,66 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   text-align: center;
+
+  input,
+  button,
+  select,
+  textarea,
+  optgroup,
+  option {
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+  }
+}
+
+.starfleet {
+  font-family: 'Starfleet';
+}
+
+.klingon {
+  font-family: 'Klingon';
+}
+
+.borg {
+  font-size: 30px;
+  font-family: 'Borg';
+}
+
+.vulcan {
+  font-family: 'Vulcan';
+}
+
+.dingbat {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 73px;
+  padding: 0 18px;
+  font-family: 'Trekbats';
+  font-size: 28px;
+
+  button {
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+    background: black;
+    border: 1px solid grey;
+    margin: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .klingonButton {
+    padding: 0 0 8px 3px;
+  }
+  .active {
+    background: white;
+    color: black;
+  }
 }
 
 .list {

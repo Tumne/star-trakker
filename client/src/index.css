@@ -1,3 +1,28 @@
+@font-face {
+  font-family: 'Starfleet';
+  src: local('Starfleet'), url(./fonts/TNG_Title.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Klingon';
+  src: local('Klingon'), url(./fonts/Klingon.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Vulcan';
+  src: local('Vulcan'), url(./fonts/Vulcan.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Borg';
+  src: local('Borg'), url(./fonts/Borg.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Trekbats';
+  src: local('Trekbats'), url(./fonts/Trekbats.ttf) format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +30,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: black;
+  color: white;
+  font-size: 20px;
 }
 
 code {

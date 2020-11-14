@@ -55,6 +55,7 @@ const Search = ({ content, setHtml, setConnections }) => {
       <input
         type="text"
         className={styles.input}
+        placeholder="Star Trek Search"
         onChange={async (e) => {
           const { value } = e.target;
           setSearchString(value);
