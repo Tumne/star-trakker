@@ -1,5 +1,5 @@
-import { Fragment, useState } from 'react';
 import classnames from 'classnames';
+import { useState } from 'react';
 import styles from './Connections.module.scss';
 
 const Connections = ({ connections, list, onClick }) => {
@@ -23,18 +23,25 @@ const Connections = ({ connections, list, onClick }) => {
   };
 
   return connections.map(({ id, title }) => (
-    <Fragment key={id}>
-      <li className={classnames(styles.li)}>
-        <button className={styles.card} onClick={async () => handleOnClick(id)}>
-          {title}
-        </button>
-      </li>
+    <li
+      key={id}
+      className={classnames(styles.li, selectedNodeId === id && styles.tabOpen)}
+    >
+      <button className={styles.card} onClick={async () => handleOnClick(id)}>
+        <span
+          className={classnames(
+            styles.chevron,
+            selectedNodeId === id && nodes.length && styles.right
+          )}
+        />
+        {title}
+      </button>
       {selectedNodeId === id && nodes.length ? (
         <ul className={styles.ul}>
           <Connections connections={nodes} list={list} onClick={onClick} />
         </ul>
       ) : null}
-    </Fragment>
+    </li>
   ));
 };
 

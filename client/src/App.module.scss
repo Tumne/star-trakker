@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   text-align: center;
-  font-family: 'Federation';
+  font-family: 'TitilliumWeb';
 
   input,
   button,
@@ -54,34 +54,58 @@
     outline: none;
     cursor: pointer;
     border-radius: 50%;
+    background: #242424;
+
+    &:hover {
+      background: #474747;
+    }
   }
 
   .klingonButton {
     padding: 0 0 8px 3px;
   }
+
   .active {
     background: white;
     color: black;
+
+    &:hover {
+      background: white;
+    }
   }
 }
 
 .list {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  border-right: 1px solid grey;
 }
 
 span {
-  background: lightgrey;
-  padding: 4px;
+  background: #e6e6e6;
+  color: black;
+  padding: 2px 8px;
+  border-radius: 5px;
 }
 
 .ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  overflow: scroll;
 
   > li {
-    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+
+    &:first-child {
+      border-top: none;
+    }
   }
+}
+
+.content {
+  overflow: scroll;
+  height: calc(100vh - 73px);
 }

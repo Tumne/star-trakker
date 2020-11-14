@@ -98,9 +98,11 @@ const App = () => {
             Q
           </button>
         </div>
-        {html.map((args, index) => (
-          <Card key={index} args={args} />
-        ))}
+        <div className={styles.content}>
+          {html.map((args, index) => (
+            <Card key={index} args={args} />
+          ))}
+        </div>
       </div>
     </div>
   );

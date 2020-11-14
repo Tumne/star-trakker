@@ -3,10 +3,7 @@
   padding: 20px;
   border: 1px solid gray;
   border-radius: 5px;
-
-  &:not(:first-child) {
-    margin-top: 0;
-  }
+  background: #101010;
 
   p {
     margin: 0;

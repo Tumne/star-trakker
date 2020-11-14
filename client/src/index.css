@@ -1,6 +1,7 @@
 @font-face {
-  font-family: 'Federation';
-  src: local('Federation'), url(./fonts/Federation.ttf) format('truetype');
+  font-family: 'TitilliumWeb';
+  src: local('TitilliumWeb'),
+    url(./fonts/TitilliumWeb-Regular.ttf) format('truetype');
 }
 
 @font-face {
