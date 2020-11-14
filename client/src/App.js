@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './App.module.scss';
+import Card from './components/Card';
 import Connections from './components/Connections';
-import { sanitize } from 'dompurify';
 import Search from './components/Search';
 
 const App = () => {
@@ -61,20 +61,9 @@ const App = () => {
         )}
       </div>
       <div className={styles.details}>
-        {html.map(({ type, body, url }, index) =>
-          type === 'image' ? (
-            <img key={index} src={url} alt={url} />
-          ) : (
-            body && (
-              <p
-                key={index}
-                dangerouslySetInnerHTML={{
-                  __html: sanitize(body),
-                }}
-              />
-            )
-          )
-        )}
+        {html.map((args, index) => (
+          <Card key={index} args={args} />
+        ))}
       </div>
     </div>
   );

@@ -6,23 +6,28 @@ const Search = ({ content, setHtml, setConnections }) => {
 
   useEffect(() => {
     let newHtml = content;
+    const regexTags = '(?!([^<])*?>)(?!<script[^>]*?>)(?![^<]*?</script>|$)';
+
     if (searchString) {
       const normReq = searchString
         .toLowerCase()
         .replace(/\s+/g, ' ')
         .trim()
         .split(' ')
-        .sort((a, b) => b.length - a.length);
+        .sort((a, b) => b.length - a.length)
+        .join('|');
 
-      newHtml = content.map(({ body, ...rest }) => ({
-        ...rest,
-        body: body
-          ? body.replace(
-              new RegExp(`(${normReq.join('|')})`, 'gi'),
-              (match) => '<mark>' + match + '</mark>'
-            )
-          : null,
-      }));
+      newHtml = content.map(({ body, ...rest }) => {
+        return {
+          ...rest,
+          body: body
+            ? body.replace(
+                new RegExp(`(${normReq})${regexTags}`, 'gi'),
+                (match) => '<mark>' + match + '</mark>'
+              )
+            : null,
+        };
+      });
     }
     setHtml(newHtml);
   }, [searchString, content, setHtml]);
