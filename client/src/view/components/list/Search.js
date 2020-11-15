@@ -9,17 +9,17 @@ import { highlightContent } from '../../utils/contentUtils';
 import styles from './Search.module.scss';
 
 const Search = ({ content }) => {
-  const [searchString, setSearchString] = useState();
+  const [queryString, setQueryString] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const details = highlightContent(content, searchString);
+    const details = highlightContent(content, queryString);
     dispatch(updateDetails(details));
-  }, [searchString, content, dispatch]);
+  }, [queryString, content, dispatch]);
 
   const handleOnChange = async (e) => {
     const { value } = e.target;
-    setSearchString(value);
+    setQueryString(value);
     if (value) {
       dispatch(searchNodes(value));
     } else {
