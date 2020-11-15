@@ -1,11 +1,14 @@
+import { useSelector } from 'react-redux';
 import Card from './Card';
 import styles from './index.module.scss';
 
-const Details = ({ html }) => {
+const Details = () => {
+  const { details } = useSelector((state) => state.nodes);
+
   return (
     <div className={styles.container}>
-      {html.length ? (
-        html.map((args, index) => <Card key={index} args={args} />)
+      {details.length ? (
+        details.map((args, index) => <Card key={index} args={args} />)
       ) : (
         <div className={styles.placeholder}>e</div>
       )}

@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { searchNodes, resetConnections } from '../../../state/nodes/nodesSlice';
+import {
+  searchNodes,
+  resetConnections,
+  updateDetails,
+} from '../../../state/nodes/nodesSlice';
 import { highlightContent } from '../../utils/contentUtils';
 import styles from './Search.module.scss';
 
-const Search = ({ content, setHtml }) => {
+const Search = ({ content }) => {
   const [searchString, setSearchString] = useState();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setHtml(highlightContent(content, searchString));
-  }, [searchString, content, setHtml]);
+    const details = highlightContent(content, searchString);
+    dispatch(updateDetails(details));
+  }, [searchString, content, dispatch]);
 
   const handleOnChange = async (e) => {
     const { value } = e.target;

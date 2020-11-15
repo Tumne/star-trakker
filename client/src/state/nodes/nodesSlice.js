@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const initialState = {
   initialNodes: [],
   connections: [],
+  details: [],
 };
 
 export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
@@ -37,6 +38,12 @@ const nodesSlice = createSlice({
         connections: state.initialNodes,
       };
     },
+    updateDetails(state, action) {
+      return {
+        ...state,
+        details: action.payload,
+      };
+    },
   },
   extraReducers: {
     [fetchNodes.fulfilled]: (state, action) => {
@@ -55,6 +62,6 @@ const nodesSlice = createSlice({
   },
 });
 
-export const { resetConnections } = nodesSlice.actions;
+export const { resetConnections, updateDetails } = nodesSlice.actions;
 
 export default nodesSlice.reducer;

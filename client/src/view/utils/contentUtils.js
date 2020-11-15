@@ -15,7 +15,6 @@ export const parseContentVariables = (content, variables) => {
 };
 
 export const highlightContent = (content, searchString) => {
-  let newHtml = content;
   const regexTags = '(?!([^<])*?>)(?!<script[^>]*?>)(?![^<]*?</script>|$)';
 
   if (searchString) {
@@ -27,7 +26,7 @@ export const highlightContent = (content, searchString) => {
       .sort((a, b) => b.length - a.length)
       .join('|');
 
-    newHtml = content.map(({ body, ...rest }) => {
+    return content.map(({ body, ...rest }) => {
       return {
         ...rest,
         body: body
@@ -40,5 +39,5 @@ export const highlightContent = (content, searchString) => {
     });
   }
 
-  return newHtml;
+  return content;
 };

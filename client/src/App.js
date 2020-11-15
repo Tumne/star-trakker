@@ -7,15 +7,14 @@ import Header from './view/layouts/Header';
 
 const App = () => {
   const [theme, setTheme] = useState('');
-  const [html, setHtml] = useState([]);
 
   return (
     <div className={classnames(styles.app, theme && styles[theme])}>
-      <div className={styles.twinkling} />
-      <List setHtml={setHtml} />
+      <div className={styles.backgroundEffect} />
+      <List />
       <div className={styles.main}>
         <Header theme={theme} onClick={setTheme} />
-        <Details html={html} />
+        <Details />
       </div>
     </div>
   );
