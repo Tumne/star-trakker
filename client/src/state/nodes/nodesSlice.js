@@ -1,26 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
-  nodes: [],
+  initialNodes: [],
+  connections: [],
 };
 
-export const fetchAllNodes = createAsyncThunk(
-  'variables/fetchVariables',
-  async () => {
-    const resNodes = await fetch('http://localhost:5000/nodes');
-    return await resNodes.json();
-  }
-);
+export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
+  const resNodes = await fetch('http://localhost:5000/nodes');
+  return await resNodes.json();
+});
 
 const nodesSlice = createSlice({
-  name: 'variables',
+  name: 'nodes',
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchAllNodes.fulfilled]: (state, action) => {
+    [fetchNodes.fulfilled]: (state, action) => {
       return {
         ...state,
-        nodes: action.payload,
+        initialNodes: action.payload,
+        connections: action.payload,
       };
     },
   },

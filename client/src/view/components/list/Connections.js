@@ -1,10 +1,16 @@
 import classnames from 'classnames';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styles from './Connections.module.scss';
+import { parseContentVariables } from '../../utils';
 
-const Connections = ({ connections, list, onClick }) => {
+const Connections = ({ connections, onClick }) => {
   const [nodes, setNodes] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
+  const {
+    nodes: { initialNodes },
+    variables,
+  } = useSelector((state) => state);
 
   const handleOnClick = async (selectedId) => {
     setSelectedNodeId(selectedId);
@@ -15,11 +21,12 @@ const Connections = ({ connections, list, onClick }) => {
     setNodes(
       childNodes
         ? childNodes.map((connectionId) =>
-            list.find((o) => o.id === connectionId)
+            initialNodes.find((o) => o.id === connectionId)
           )
         : []
     );
-    onClick(content);
+
+    onClick(parseContentVariables(content, variables));
   };
 
   return connections.map(({ id, title }) => (
@@ -38,7 +45,7 @@ const Connections = ({ connections, list, onClick }) => {
       </button>
       {selectedNodeId === id && nodes.length ? (
         <ul className={styles.ul}>
-          <Connections connections={nodes} list={list} onClick={onClick} />
+          <Connections connections={nodes} onClick={onClick} />
         </ul>
       ) : null}
     </li>

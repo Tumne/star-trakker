@@ -1,32 +1,34 @@
 @font-face {
   font-family: 'TitilliumWeb';
   src: local('TitilliumWeb'),
-    url(./fonts/TitilliumWeb-Regular.ttf) format('truetype');
+    url(./view/assets/fonts/TitilliumWeb-Regular.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Starfleet';
-  src: local('Starfleet'), url(./fonts/TNG_Title.ttf) format('truetype');
+  src: local('Starfleet'),
+    url(./view/assets/fonts/TNG_Title.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Klingon';
-  src: local('Klingon'), url(./fonts/Klingon.ttf) format('truetype');
+  src: local('Klingon'), url(./view/assets/fonts/Klingon.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Vulcan';
-  src: local('Vulcan'), url(./fonts/Vulcan.ttf) format('truetype');
+  src: local('Vulcan'), url(./view/assets/fonts/Vulcan.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Borg';
-  src: local('Borg'), url(./fonts/Borg.ttf) format('truetype');
+  src: local('Borg'), url(./view/assets/fonts/Borg.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Trekbats';
-  src: local('Trekbats'), url(./fonts/Trekbats.ttf) format('truetype');
+  src: local('Trekbats'),
+    url(./view/assets/fonts/Trekbats.ttf) format('truetype');
 }
 
 body {

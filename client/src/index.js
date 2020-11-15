@@ -4,9 +4,12 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './state/store';
 import { fetchVariables } from './state/variables/variablesSlice';
+import { fetchNodes } from './state/nodes/nodesSlice';
+
 import './index.css';
 
 store.dispatch(fetchVariables());
+store.dispatch(fetchNodes());
 
 ReactDOM.render(
   <React.StrictMode>
