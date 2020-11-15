@@ -2,10 +2,10 @@ import classnames from 'classnames';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './Connections.module.scss';
-import { parseContentVariables } from '../../utils';
+import { parseContentVariables } from '../../utils/contentUtils';
 
 const Connections = ({ connections, onClick }) => {
-  const [nodes, setNodes] = useState([]);
+  const [childConnections, setChildConnections] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
   const {
     nodes: { initialNodes },
@@ -14,18 +14,15 @@ const Connections = ({ connections, onClick }) => {
 
   const handleOnClick = async (selectedId) => {
     setSelectedNodeId(selectedId);
-
     const response = await fetch(`http://localhost:5000/nodes/${selectedId}`);
     const { content, connections: childNodes } = (await response.json())[0];
-
-    setNodes(
+    setChildConnections(
       childNodes
         ? childNodes.map((connectionId) =>
             initialNodes.find((o) => o.id === connectionId)
           )
         : []
     );
-
     onClick(parseContentVariables(content, variables));
   };
 
@@ -38,14 +35,14 @@ const Connections = ({ connections, onClick }) => {
         <span
           className={classnames(
             styles.chevron,
-            selectedNodeId === id && nodes.length && styles.right
+            selectedNodeId === id && childConnections.length && styles.right
           )}
         />
         {title}
       </button>
-      {selectedNodeId === id && nodes.length ? (
+      {selectedNodeId === id && childConnections.length ? (
         <ul className={styles.ul}>
-          <Connections connections={nodes} onClick={onClick} />
+          <Connections connections={childConnections} onClick={onClick} />
         </ul>
       ) : null}
     </li>

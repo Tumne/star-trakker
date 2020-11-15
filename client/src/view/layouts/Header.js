@@ -1,19 +1,19 @@
 import classnames from 'classnames';
 import styles from './Header.module.scss';
 
-const Header = ({ theme, setTheme }) => (
+const Header = ({ theme, onClick }) => (
   <div className={styles.header}>
     <div className={styles.title}>Star trakker</div>
     <div>
       <button
         className={classnames(theme === '' && styles.active)}
-        onClick={() => setTheme('')}
+        onClick={() => onClick('')}
       >
         S
       </button>
       <button
         className={classnames(theme === 'starfleet' && styles.active)}
-        onClick={() => setTheme('starfleet')}
+        onClick={() => onClick('starfleet')}
       >
         A
       </button>
@@ -22,19 +22,19 @@ const Header = ({ theme, setTheme }) => (
           styles.klingonButton,
           theme === 'klingon' && styles.active
         )}
-        onClick={() => setTheme('klingon')}
+        onClick={() => onClick('klingon')}
       >
         E
       </button>
       <button
         className={classnames(theme === 'vulcan' && styles.active)}
-        onClick={() => setTheme('vulcan')}
+        onClick={() => onClick('vulcan')}
       >
         K
       </button>
       <button
         className={classnames(theme === 'borg' && styles.active)}
-        onClick={() => setTheme('borg')}
+        onClick={() => onClick('borg')}
       >
         Q
       </button>
