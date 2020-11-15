@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react';
-import styles from './App.module.scss';
 import classnames from 'classnames';
-import Card from './components/Card';
-import Connections from './components/Connections';
-import Search from './components/Search';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import styles from './App.module.scss';
+import Details from './view/pages/details';
+import List from './view/pages/list';
 
 const App = () => {
-  const [variables, setVariables] = useState([]);
+  const [theme, setTheme] = useState('');
   const [nodes, setNodes] = useState([]);
   const [connections, setConnections] = useState([]);
   const [content, setContent] = useState([]);
   const [html, setHtml] = useState([]);
-  const [theme, setTheme] = useState('');
+  const variables = useSelector((state) => state.variables);
 
   useEffect(() => {
     (async () => {
@@ -19,10 +19,6 @@ const App = () => {
       const newNodes = await resNodes.json();
       setNodes(newNodes);
       setConnections(newNodes);
-
-      const resVariables = await fetch('http://localhost:5000/variables');
-      const newVariables = await resVariables.json();
-      setVariables(newVariables);
     })();
   }, []);
 
@@ -41,77 +37,19 @@ const App = () => {
   return (
     <div className={classnames(styles.app, theme && styles[theme])}>
       <div className={styles.twinkling} />
-      <div className={styles.list}>
-        <Search
-          content={content}
-          setHtml={setHtml}
-          setConnections={(value) => setConnections(value || nodes)}
-        />
-        {connections.length ? (
-          <ul className={styles.ul}>
-            <Connections
-              connections={connections}
-              list={nodes}
-              onClick={(content) => {
-                const parsedContent = content.map((o) => parseVariables(o));
-                setHtml(parsedContent);
-                setContent(parsedContent);
-              }}
-            />
-          </ul>
-        ) : (
-          <div>No titles found</div>
-        )}
-      </div>
-      <div className={styles.details}>
-        <div className={styles.dingbat}>
-          <div className={styles.starfleet}>Star trakker</div>
-          <div>
-            <button
-              className={classnames(theme === '' && styles.active)}
-              onClick={() => setTheme('')}
-            >
-              S
-            </button>
-            <button
-              className={classnames(theme === 'starfleet' && styles.active)}
-              onClick={() => setTheme('starfleet')}
-            >
-              A
-            </button>
-            <button
-              className={classnames(
-                styles.klingonButton,
-                theme === 'klingon' && styles.active
-              )}
-              onClick={() => setTheme('klingon')}
-            >
-              E
-            </button>
-            <button
-              className={classnames(theme === 'vulcan' && styles.active)}
-              onClick={() => setTheme('vulcan')}
-            >
-              K
-            </button>
-            <button
-              className={classnames(theme === 'borg' && styles.active)}
-              onClick={() => setTheme('borg')}
-            >
-              Q
-            </button>
-          </div>
-        </div>
-        <div className={styles.content}>
-          {html.length ? (
-            html.map((args, index) => <Card key={index} args={args} />)
-          ) : (
-            <div className={classnames(styles.placeholder, styles.dingbat)}>
-              e
-            </div>
-          )}
-        </div>
-      </div>
+      <List
+        content={content}
+        connections={connections}
+        nodes={nodes}
+        setHtml={setHtml}
+        setConnections={setConnections}
+        onClick={(newContent) => {
+          const parsedContent = newContent.map((o) => parseVariables(o));
+          setHtml(parsedContent);
+          setContent(parsedContent);
+        }}
+      />
+      <Details theme={theme} setTheme={setTheme} html={html} />
     </div>
   );
 };

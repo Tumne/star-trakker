@@ -1,0 +1,25 @@
+.details {
+  z-index: 2;
+}
+
+.content {
+  overflow: scroll;
+  height: calc(100vh - 73px);
+
+  span {
+    background: #e6e6e6;
+    color: black;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 73px);
+  font-family: 'Trekbats';
+  font-size: 150px;
+  color: grey;
+}

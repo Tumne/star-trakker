@@ -1,0 +1,44 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 73px;
+  padding: 0 18px;
+  font-family: 'Trekbats';
+  font-size: 28px;
+
+  button {
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+    background: black;
+    border: 1px solid grey;
+    margin: 5px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #242424;
+
+    &:hover {
+      background: #474747;
+    }
+  }
+
+  .klingonButton {
+    padding-left: 8px;
+  }
+
+  .active {
+    background: white;
+    color: black;
+
+    &:hover {
+      background: white;
+    }
+  }
+}
+
+.title {
+  font-family: 'Starfleet';
+}

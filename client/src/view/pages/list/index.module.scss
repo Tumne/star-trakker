@@ -1,0 +1,24 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-right: 1px solid grey;
+  z-index: 2;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 1px solid grey;
+  background: black;
+  overflow: scroll;
+
+  > li {
+    border-top: 1px solid grey;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+}
