@@ -31,7 +31,7 @@ export const highlightContent = (content, searchString) => {
       return {
         ...rest,
         body: body
-          ? body.replace(
+          ? `${body} `.replace(
               new RegExp(`(${normReq})${regexTags}`, 'gi'),
               (match) => '<mark>' + match + '</mark>'
             )
