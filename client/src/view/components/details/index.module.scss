@@ -3,10 +3,14 @@
   height: calc(100vh - 73px);
 
   span {
+    display: inline-block;
+    height: 12px;
+    font-size: 16px;
+    line-height: 13px;
     background: #e6e6e6;
     color: black;
-    padding: 2px 8px;
-    border-radius: 5px;
+    padding: 6px 19px;
+    border-radius: 18px;
   }
 }
 

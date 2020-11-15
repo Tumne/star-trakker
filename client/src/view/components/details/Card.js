@@ -1,23 +1,20 @@
 import { sanitize } from 'dompurify';
 import styles from './Card.module.scss';
+import { hasStringLength } from '../../utils/stringUtils';
 
-const Card = ({ args }) => {
-  const { type, url, body } = args;
-  return type === 'image' ? (
+const Card = ({ args: { type, url, body } }) =>
+  type === 'image' ? (
     <div className={styles.content}>
       <img src={url} alt={url} />
     </div>
-  ) : (
-    body && (
-      <div className={styles.content}>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: sanitize(body),
-          }}
-        />
-      </div>
-    )
-  );
-};
+  ) : hasStringLength(body) ? (
+    <div className={styles.content}>
+      <p
+        dangerouslySetInnerHTML={{
+          __html: sanitize(body),
+        }}
+      />
+    </div>
+  ) : null;
 
 export default Card;
