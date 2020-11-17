@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   initialNodes: [],
@@ -12,6 +12,18 @@ export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
   const res = await fetch('http://localhost:5000/nodes');
   return await res.json();
 });
+
+export const fetchSelectedNode = createAsyncThunk(
+  'nodes/fetchSelectedNode',
+  async (selectedId) => {
+    const id = selectedId.split('.').pop();
+    const res = await fetch(`http://localhost:5000/nodes/${id}`);
+    return {
+      ...(await res.json())[0],
+      selectedId,
+    };
+  }
+);
 
 export const searchNodes = createAsyncThunk(
   'nodes/searchNodes',
@@ -40,10 +52,6 @@ const nodesSlice = createSlice({
         nodes: state.initialNodes,
       };
     },
-    setSelectedNode(state, action) {
-      const { content, nodeId: selectedId } = action.payload;
-      return { ...state, content, selectedId };
-    },
     setQueryString(state, action) {
       return { ...state, queryString: action.payload };
     },
@@ -52,6 +60,7 @@ const nodesSlice = createSlice({
     [fetchNodes.fulfilled]: (state, action) => {
       const nodes = action.payload.map((node) => ({
         ...node,
+        connections: [],
         nodeId: node.id.toString(),
       }));
       return {
@@ -60,10 +69,47 @@ const nodesSlice = createSlice({
         nodes,
       };
     },
+    [fetchSelectedNode.fulfilled]: (state, action) => {
+      const { connections, content, selectedId } = action.payload;
+
+      const selectedConnections = connections
+        ? connections.map((connectionId) => {
+            return {
+              ...state.initialNodes.find((o) => o.id === connectionId),
+              connections: [],
+              nodeId: [selectedId, connectionId].join('.'),
+            };
+          })
+        : [];
+
+      const insertSelectedConnection = (stateNodes, selectedArray) => {
+        if (selectedArray.length) {
+          const selectedId = selectedArray.shift();
+          return stateNodes.map((node) => ({
+            ...node,
+            connections:
+              node.id.toString() === selectedId
+                ? insertSelectedConnection(node.connections, selectedArray)
+                : [],
+          }));
+        }
+
+        return selectedConnections;
+      };
+
+      return {
+        ...state,
+        nodes: insertSelectedConnection(state.nodes, selectedId.split('.')),
+        content,
+        selectedId,
+      };
+    },
     [searchNodes.fulfilled]: (state, action) => {
       return {
         ...state,
-        nodes: action.payload,
+        nodes: state.nodes.filter((node) =>
+          action.payload.find(({ id }) => node.id === id)
+        ),
       };
     },
   },
