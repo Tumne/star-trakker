@@ -1,11 +1,10 @@
 import { useSelector } from 'react-redux';
 import Connections from './Connections';
 import styles from './index.module.scss';
-import Search from './Search';
+import Search from '../filters/Search';
 
 const List = () => {
   const { nodes } = useSelector((state) => state.nodes);
-
   return (
     <div className={styles.list}>
       <Search />

@@ -4,6 +4,7 @@ const initialState = {
   initialNodes: [],
   nodes: [],
   content: [],
+  selectedId: '',
   queryString: '',
 };
 
@@ -12,13 +13,14 @@ export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
   return await res.json();
 });
 
-export const fetchSelectedNode = createAsyncThunk(
-  'nodes/fetchSelectedNode',
-  async (id) => {
-    const res = await fetch(`http://localhost:5000/nodes/${id}`);
-    return (await res.json())[0];
-  }
-);
+// TODO
+// export const fetchSelectedNode = createAsyncThunk(
+//   'nodes/fetchSelectedNode',
+//   async (id) => {
+//     const res = await fetch(`http://localhost:5000/nodes/${id}`);
+//     return (await res.json())[0];
+//   }
+// );
 
 export const searchNodes = createAsyncThunk(
   'nodes/searchNodes',
@@ -47,39 +49,48 @@ const nodesSlice = createSlice({
         nodes: state.initialNodes,
       };
     },
+    setSelectedNode(state, action) {
+      const { content, nodeId: selectedId } = action.payload;
+      return { ...state, content, selectedId };
+    },
     setQueryString(state, action) {
       return { ...state, queryString: action.payload };
     },
   },
   extraReducers: {
     [fetchNodes.fulfilled]: (state, action) => {
+      const nodes = action.payload.map((node) => ({
+        ...node,
+        nodeId: node.id.toString(),
+      }));
       return {
         ...state,
-        initialNodes: action.payload,
-        nodes: action.payload.map((o) => ({ ...o, connections: [] })),
+        initialNodes: nodes,
+        nodes,
       };
     },
-    [fetchSelectedNode.fulfilled]: (state, action) => {
-      // TODO:
-      // const { connections, id: selectedId, content } = action.payload;
-      // const newConnections = connections
-      //   ? connections.map((connectionId) => {
-      //       return {
-      //         ...state.initialNodes.find((o) => o.id === connectionId),
-      //         connections: [],
-      //       };
-      //     })
-      //   : [];
-      // const nodes = state.nodes.map((node) => ({
-      //   ...node,
-      //   connections: node.id === selectedId ? newConnections : [],
-      // }));
+    // TODO
+    // [fetchSelectedNode.fulfilled]: (state, action) => {
+    //   // TODO:
+    //   // const { connections, id: selectedId, content } = action.payload;
+    //   // const newConnections = connections
+    //   //   ? connections.map((connectionId) => {
+    //   //       return {
+    //   //         ...state.initialNodes.find((o) => o.id === connectionId),
+    //   //         connections: [],
+    //   //       };
+    //   //     })
+    //   //   : [];
+    //   // const nodes = state.nodes.map((node) => ({
+    //   //   ...node,
+    //   //   connections: node.id === selectedId ? newConnections : [],
+    //   // }));
 
-      return {
-        ...state,
-        content: action.payload.content,
-      };
-    },
+    //   return {
+    //     ...state,
+    //     content: action.payload.content,
+    //   };
+    // },
     [searchNodes.fulfilled]: (state, action) => {
       return {
         ...state,
@@ -89,6 +100,10 @@ const nodesSlice = createSlice({
   },
 });
 
-export const { resetConnections, setQueryString } = nodesSlice.actions;
+export const {
+  resetConnections,
+  setSelectedNode,
+  setQueryString,
+} = nodesSlice.actions;
 
 export default nodesSlice.reducer;

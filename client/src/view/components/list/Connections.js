@@ -1,37 +1,44 @@
 import classnames from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSelectedNode } from '../../../state/nodes/nodesSlice';
+import { setSelectedNode } from '../../../state/nodes/nodesSlice';
 import styles from './Connections.module.scss';
 
 const Connections = ({ nodes }) => {
   const [connections, setConnections] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
   const dispatch = useDispatch();
-  const { initialNodes } = useSelector((state) => state.nodes);
+  const { initialNodes, selectedId } = useSelector((state) => state.nodes);
 
-  const handleOnClick = async (selectedId) => {
-    setSelectedNodeId(selectedId);
-    dispatch(fetchSelectedNode(selectedId));
+  const handleOnClick = async (id, nodeId) => {
+    setSelectedNodeId(id);
 
-    const response = await fetch(`http://localhost:5000/nodes/${selectedId}`);
-    const { connections: childNodes } = (await response.json())[0];
+    const response = await fetch(`http://localhost:5000/nodes/${id}`);
+    const { content, connections: childNodes } = (await response.json())[0];
 
+    dispatch(setSelectedNode({ content, nodeId }));
     setConnections(
       childNodes
-        ? childNodes.map((connectionId) =>
-            initialNodes.find((o) => o.id === connectionId)
-          )
+        ? childNodes.map((connectionId) => ({
+            ...initialNodes.find((o) => o.id === connectionId),
+            nodeId: [nodeId, connectionId].join('.'),
+          }))
         : []
     );
   };
 
-  return nodes.map(({ id, title }) => (
+  return nodes.map(({ id, title, nodeId }) => (
     <li
       key={id}
       className={classnames(styles.li, selectedNodeId === id && styles.tabOpen)}
     >
-      <button className={styles.card} onClick={async () => handleOnClick(id)}>
+      <button
+        className={classnames(
+          styles.card,
+          selectedId === nodeId && styles.selected
+        )}
+        onClick={async () => handleOnClick(id, nodeId)}
+      >
         <span
           className={classnames(
             styles.chevron,
