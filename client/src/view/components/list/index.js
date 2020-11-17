@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
+import Search from '../filters/Search';
 import Connections from './Connections';
 import styles from './index.module.scss';
-import Search from '../filters/Search';
 
 const List = () => {
   const { nodes } = useSelector((state) => state.nodes);

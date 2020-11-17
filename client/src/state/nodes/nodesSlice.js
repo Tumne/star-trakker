@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   initialNodes: [],
@@ -13,7 +13,6 @@ export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
   return await res.json();
 });
 
-// TODO
 export const fetchSelectedNode = createAsyncThunk(
   'nodes/fetchSelectedNode',
   async (selectedId) => {

@@ -1,6 +1,6 @@
 import { sanitize } from 'dompurify';
-import styles from './Card.module.scss';
 import { hasStringLength } from '../../utils/stringUtils';
+import styles from './Card.module.scss';
 
 const Card = ({ args: { type, url, body } }) =>
   type === 'image' ? (
