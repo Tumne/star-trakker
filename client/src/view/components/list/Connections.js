@@ -1,33 +1,32 @@
 import classnames from 'classnames';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedNode } from '../../../state/nodes/nodesSlice';
+import { fetchSelectedNode } from '../../../state/nodes/nodesSlice';
 import styles from './Connections.module.scss';
 
 const Connections = ({ nodes }) => {
-  const [connections, setConnections] = useState([]);
+  // const [connections, setConnections] = useState([]);
   const [selectedNodeId, setSelectedNodeId] = useState('');
   const dispatch = useDispatch();
-  const { initialNodes, selectedId } = useSelector((state) => state.nodes);
+  const { selectedId } = useSelector((state) => state.nodes);
 
   const handleOnClick = async (id, nodeId) => {
     setSelectedNodeId(id);
+    dispatch(fetchSelectedNode(nodeId));
+    // const response = await fetch(`http://localhost:5000/nodes/${id}`);
+    // const { connections: childNodes } = (await response.json())[0];
 
-    const response = await fetch(`http://localhost:5000/nodes/${id}`);
-    const { content, connections: childNodes } = (await response.json())[0];
-
-    dispatch(setSelectedNode({ content, nodeId }));
-    setConnections(
-      childNodes
-        ? childNodes.map((connectionId) => ({
-            ...initialNodes.find((o) => o.id === connectionId),
-            nodeId: [nodeId, connectionId].join('.'),
-          }))
-        : []
-    );
+    // setConnections(
+    //   childNodes
+    //     ? childNodes.map((connectionId) => ({
+    //         ...initialNodes.find((o) => o.id === connectionId),
+    //         nodeId: [nodeId, connectionId].join('.'),
+    //       }))
+    //     : []
+    // );
   };
 
-  return nodes.map(({ id, title, nodeId }) => (
+  return nodes.map(({ id, title, nodeId, connections }) => (
     <li
       key={id}
       className={classnames(styles.li, selectedNodeId === id && styles.tabOpen)}
