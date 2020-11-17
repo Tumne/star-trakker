@@ -3,7 +3,7 @@ import Card from './Card';
 import styles from './index.module.scss';
 
 const Details = () => {
-  const { details } = useSelector((state) => state.nodes);
+  const details = useSelector((state) => state.nodes.details);
 
   return (
     <div className={styles.container}>

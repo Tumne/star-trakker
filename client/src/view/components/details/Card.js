@@ -7,7 +7,7 @@ const Card = ({ args: { type, url, body } }) =>
     <div className={styles.content}>
       <img src={url} alt={url} />
     </div>
-  ) : hasStringLength(body) ? (
+  ) : body && hasStringLength(body) ? (
     <div className={styles.content}>
       <p
         dangerouslySetInnerHTML={{

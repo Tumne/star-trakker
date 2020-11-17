@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
-  searchNodes,
   resetConnections,
+  searchNodes,
   updateDetails,
 } from '../../../state/nodes/nodesSlice';
-import { highlightContent } from '../../utils/contentUtils';
+import {
+  highlightContent,
+  parseContentVariables,
+} from '../../utils/contentUtils';
 import styles from './Search.module.scss';
 
-const Search = ({ content }) => {
+const Search = () => {
   const [queryString, setQueryString] = useState();
   const dispatch = useDispatch();
+  const content = useSelector((state) => state.nodes.content);
+  const variables = useSelector((state) => state.variables);
 
   useEffect(() => {
-    const details = highlightContent(content, queryString);
+    const parsedContent = parseContentVariables(content, variables);
+    const details = highlightContent(parsedContent, queryString);
     dispatch(updateDetails(details));
-  }, [queryString, content, dispatch]);
+  }, [queryString, content, variables, dispatch]);
 
   const handleOnChange = async (e) => {
     const { value } = e.target;

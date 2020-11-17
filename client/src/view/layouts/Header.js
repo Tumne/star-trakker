@@ -3,7 +3,7 @@ import styles from './Header.module.scss';
 
 const Header = ({ theme, onClick }) => (
   <div className={styles.header}>
-    <div className={styles.title}>Star trakker</div>
+    <div className={styles.title}>Star Trakker</div>
     <div>
       <button
         className={classnames(theme === '' && styles.active)}
