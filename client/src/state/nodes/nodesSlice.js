@@ -53,11 +53,6 @@ const nodesSlice = createSlice({
         nodes: state.initialNodes,
       };
     },
-    // TO REMOVE
-    // setSelectedNode(state, action) {
-    //   const { content, nodeId: selectedId } = action.payload;
-    //   return { ...state, content, selectedId };
-    // },
     setQueryString(state, action) {
       return { ...state, queryString: action.payload };
     },
@@ -83,19 +78,29 @@ const nodesSlice = createSlice({
             return {
               ...state.initialNodes.find((o) => o.id === connectionId),
               connections: [],
+              nodeId: [selectedId, connectionId].join('.'),
             };
           })
         : [];
 
-      //TODO: insert via recursion
-      const nodes = state.nodes.map((node) => ({
-        ...node,
-        connections: node.nodeId === selectedId ? selectedConnections : [],
-      }));
+      const insertSelectedConnection = (stateNodes, selectedArray) => {
+        if (selectedArray.length) {
+          const selectedId = selectedArray.shift();
+          return stateNodes.map((node) => ({
+            ...node,
+            connections:
+              node.id.toString() === selectedId
+                ? insertSelectedConnection(node.connections, selectedArray)
+                : [],
+          }));
+        }
+
+        return selectedConnections;
+      };
 
       return {
         ...state,
-        nodes,
+        nodes: insertSelectedConnection(state.nodes, selectedId.split('.')),
         content,
         selectedId,
       };
