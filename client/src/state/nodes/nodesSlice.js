@@ -4,7 +4,7 @@ const initialState = {
   initialNodes: [],
   nodes: [],
   content: [],
-  details: [],
+  queryString: '',
 };
 
 export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
@@ -47,11 +47,8 @@ const nodesSlice = createSlice({
         nodes: state.initialNodes,
       };
     },
-    updateDetails(state, action) {
-      return {
-        ...state,
-        details: action.payload,
-      };
+    setQueryString(state, action) {
+      return { ...state, queryString: action.payload };
     },
   },
   extraReducers: {
@@ -63,8 +60,8 @@ const nodesSlice = createSlice({
       };
     },
     [fetchSelectedNode.fulfilled]: (state, action) => {
+      // TODO:
       // const { connections, id: selectedId, content } = action.payload;
-
       // const newConnections = connections
       //   ? connections.map((connectionId) => {
       //       return {
@@ -73,7 +70,6 @@ const nodesSlice = createSlice({
       //       };
       //     })
       //   : [];
-
       // const nodes = state.nodes.map((node) => ({
       //   ...node,
       //   connections: node.id === selectedId ? newConnections : [],
@@ -93,6 +89,6 @@ const nodesSlice = createSlice({
   },
 });
 
-export const { resetConnections, updateDetails } = nodesSlice.actions;
+export const { resetConnections, setQueryString } = nodesSlice.actions;
 
 export default nodesSlice.reducer;
