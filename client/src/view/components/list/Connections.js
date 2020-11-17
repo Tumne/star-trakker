@@ -10,7 +10,7 @@ const Connections = ({ nodes }) => {
   return nodes.map(({ id, title, nodeId, connections }) => (
     <li
       key={id}
-      className={classnames(styles.li, selectedId === id && styles.tabOpen)}
+      className={classnames(styles.li, connections.length && styles.tabOpen)}
     >
       <button
         className={classnames(
