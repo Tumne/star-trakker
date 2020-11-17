@@ -13,15 +13,6 @@ export const fetchNodes = createAsyncThunk('nodes/fetchNodes', async () => {
   return await res.json();
 });
 
-// TODO
-// export const fetchSelectedNode = createAsyncThunk(
-//   'nodes/fetchSelectedNode',
-//   async (id) => {
-//     const res = await fetch(`http://localhost:5000/nodes/${id}`);
-//     return (await res.json())[0];
-//   }
-// );
-
 export const searchNodes = createAsyncThunk(
   'nodes/searchNodes',
   async (query) => {
@@ -69,28 +60,6 @@ const nodesSlice = createSlice({
         nodes,
       };
     },
-    // TODO
-    // [fetchSelectedNode.fulfilled]: (state, action) => {
-    //   // TODO:
-    //   // const { connections, id: selectedId, content } = action.payload;
-    //   // const newConnections = connections
-    //   //   ? connections.map((connectionId) => {
-    //   //       return {
-    //   //         ...state.initialNodes.find((o) => o.id === connectionId),
-    //   //         connections: [],
-    //   //       };
-    //   //     })
-    //   //   : [];
-    //   // const nodes = state.nodes.map((node) => ({
-    //   //   ...node,
-    //   //   connections: node.id === selectedId ? newConnections : [],
-    //   // }));
-
-    //   return {
-    //     ...state,
-    //     content: action.payload.content,
-    //   };
-    // },
     [searchNodes.fulfilled]: (state, action) => {
       return {
         ...state,
