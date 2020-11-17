@@ -5,7 +5,7 @@ import Search from '../filters/Search';
 
 const List = () => {
   const { nodes } = useSelector((state) => state.nodes);
-  console.log(nodes);
+
   return (
     <div className={styles.list}>
       <Search />

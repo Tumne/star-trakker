@@ -77,7 +77,7 @@ const nodesSlice = createSlice({
     },
     [fetchSelectedNode.fulfilled]: (state, action) => {
       const { connections, content, selectedId } = action.payload;
-      console.log(action.payload);
+
       const selectedConnections = connections
         ? connections.map((connectionId) => {
             return {
@@ -87,6 +87,7 @@ const nodesSlice = createSlice({
           })
         : [];
 
+      //TODO: insert via recursion
       const nodes = state.nodes.map((node) => ({
         ...node,
         connections: node.nodeId === selectedId ? selectedConnections : [],
