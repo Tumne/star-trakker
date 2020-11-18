@@ -16,30 +16,30 @@ In addition, I styled the app with a deep space like theme and included “unive
 
 ## The Process
 
-With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. Early on, I quickly made sure the application worked in a few files. I coded the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware that it will need later optimization.
+With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. I quickly made sure the application worked in a few component files, coding most of the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware to later optimize and refactor.
 
-Next I styled the app with great thought to usability and aesthetics.
+Next I styled the app paying great attention to the aesthetics design and overall usability.
 
-Afterwards, I decided to move most of the state logic into a redux architecture, all the while refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase with react-redux hooks.
+Afterwards, I decided to move most of the state logic into a redux architecture; refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase using react-redux hooks.
 
-I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminated unnecessary api calls. In addition, by creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
+I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminated unnecessary api calls. Creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could also be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
 
-Highlighting content was completed using some custom util functions and nifty regex expressions that ignore any html tags while searching. Using the dompurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
+Highlighting content using nifty regex expressions that ignore any html tags while searching. DOMpurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
 
 ## Further implementation:
 
-Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the text, if this was a real app, I’d expand the highlighting feature to the list. For larger datasets, I’d consider paginating the data in and better caching within global state (redux).
+Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the titles, if this was a real app, I’d also highlight text in the node list. For larger datasets, I’d consider paginating the data in and better caching within global state (redux or even content-api).
 
 Other aspects of the code would need attention too;
 
 - internationalization
 - accessibility (alternative text for images, keyboard navigation, resizing text, etc),
-- typescript (opted out, but usually my default),
+- typescript (opted out, but usually my go to),
 - jsdoc comments everywhere (currently only in util files),
 - scss mixins/variables or even better styled-components
-- constants and enums for api endpoints and the like
+- constants, enums, overall clean up.
 
-If this was a production ready app, I would eject create-react-app and configure accordingly, though realistically would have built the webpack from scratch. Code splitting, lazy loading sections, common chunks. Dockerfiles, env variables, deploy scripts, the whole nine.
+If this was a production ready app, I would eject create-react-app and configure accordingly, though realistically would have built the webpack from scratch. Code splitting, lazy loading sections, common chunks. Dockerfiles, env variables, deploy scripts; the whole deep space nine.
 
 ## Getting Started
 
