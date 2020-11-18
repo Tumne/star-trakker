@@ -11,6 +11,7 @@ I have built a **Start Trakker** app that solves all the following challenges:
 - replace content with template string variables
 
 In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy
+
 🖖
 
 ## The Process
