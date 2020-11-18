@@ -10,7 +10,7 @@ const Connections = ({ nodes }) => {
   return nodes.map(({ id, title, nodeId, connections }) => (
     <li
       key={id}
-      className={classnames(styles.li, connections.length && styles.tabOpen)}
+      className={classnames(styles.li, connections?.length && styles.tabOpen)}
     >
       <button
         className={classnames(
@@ -22,12 +22,14 @@ const Connections = ({ nodes }) => {
         <span
           className={classnames(
             styles.chevron,
-            connections.length && styles.right
+            connections
+              ? connections?.length && styles.right
+              : styles.placeholder
           )}
         />
         {title}
       </button>
-      {connections.length ? (
+      {connections?.length ? (
         <ul className={styles.ul}>
           <Connections nodes={connections} />
         </ul>

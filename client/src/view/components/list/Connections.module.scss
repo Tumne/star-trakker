@@ -53,3 +53,9 @@
     transform: rotate(135deg);
   }
 }
+
+.placeholder {
+  &::before {
+    color: transparent;
+  }
+}

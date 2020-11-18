@@ -8,7 +8,6 @@ import Header from './view/layouts/Header';
 const App = () => {
   const [theme, setTheme] = useState('');
 
-  // TODO: add backgroundEffect back in before submitting
   return (
     <div className={classnames(styles.app, theme && styles[theme])}>
       {/* <div className={styles.backgroundEffect} /> */}

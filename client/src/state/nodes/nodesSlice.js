@@ -68,13 +68,13 @@ const nodesSlice = createSlice({
       return {
         ...state,
         initialNodes: nodes,
+        cachedNodes: nodes,
         nodes,
       };
     },
     [fetchSelectedNode.fulfilled]: (state, action) => {
       const { connections, content, selectedId } = action.payload;
-
-      const selectedConnections = connections
+      const newConnections = connections
         ? connections.map((connectionId) => {
             return {
               ...state.initialNodes.find((o) => o.id === connectionId),
@@ -82,42 +82,48 @@ const nodesSlice = createSlice({
               nodeId: [selectedId, connectionId].join('.'),
             };
           })
-        : [];
+        : null;
 
-      const insertSelectedConnection = (stateNodes, selectedArray) => {
-        if (selectedArray.length) {
-          const selectedId = selectedArray.shift();
-          return stateNodes.map((node) => ({
+      const insertNewConnections = (currNodes, arr) => {
+        if (arr.length) {
+          const selectedId = arr.shift();
+          return currNodes.map((node) => ({
             ...node,
             connections:
               node.id.toString() === selectedId
-                ? insertSelectedConnection(node.connections, selectedArray)
+                ? insertNewConnections(node.connections, arr)
                 : [],
           }));
         }
-        return selectedConnections;
+        return newConnections;
       };
+
+      const nodes = insertNewConnections(state.nodes, selectedId.split('.'));
+
+      const cachedNodes = insertNewConnections(
+        state.cachedNodes,
+        selectedId.split('.')
+      );
 
       return {
         ...state,
-        nodes: insertSelectedConnection(state.nodes, selectedId.split('.')),
-        cachedNodes: insertSelectedConnection(
-          state.cachedNodes,
-          selectedId.split('.')
-        ),
+        nodes,
+        cachedNodes,
         content,
         selectedId,
       };
     },
     [searchNodes.fulfilled]: (state, action) => {
-      const { nodes, queryString } = action.payload;
+      const { nodes: payloadNodes, queryString } = action.payload;
       const cachedNodes = state.queryString ? state.cachedNodes : state.nodes;
+
+      const nodes = cachedNodes.filter((node) =>
+        payloadNodes.find(({ id }) => node.id === id)
+      );
 
       return {
         ...state,
-        nodes: cachedNodes.filter((node) =>
-          nodes.find(({ id }) => node.id === id)
-        ),
+        nodes,
         cachedNodes,
         queryString,
       };
