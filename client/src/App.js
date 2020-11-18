@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <div className={classnames(styles.app, theme && styles[theme])}>
-      {/* <div className={styles.backgroundEffect} /> */}
+      <div className={styles.backgroundEffect} />
       <List />
       <div className={styles.main}>
         <Header theme={theme} onClick={setTheme} />
