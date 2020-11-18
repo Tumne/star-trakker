@@ -1,18 +1,13 @@
 import { useDispatch } from 'react-redux';
-import {
-  resetConnections,
-  searchNodes,
-  setQueryString,
-} from '../../../state/nodes/nodesSlice';
+import { resetSearch, searchNodes } from '../../../state/nodes/nodesSlice';
 import styles from './Search.module.scss';
 
 const Search = () => {
   const dispatch = useDispatch();
 
   const handleOnChange = async (e) => {
-    const { value } = e.target;
-    dispatch(setQueryString(value));
-    dispatch(value ? searchNodes(value) : resetConnections());
+    const queryString = e.target.value.trim();
+    dispatch(queryString ? searchNodes(queryString) : resetSearch());
   };
 
   return (

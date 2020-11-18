@@ -5,7 +5,6 @@ import styles from './index.module.scss';
 
 const List = () => {
   const { nodes } = useSelector((state) => state.nodes);
-
   return (
     <div className={styles.list}>
       <Search />

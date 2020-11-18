@@ -3,6 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 const initialState = {
   initialNodes: [],
   nodes: [],
+  cachedNodes: [],
   content: [],
   selectedId: '',
   queryString: '',
@@ -38,7 +39,10 @@ export const searchNodes = createAsyncThunk(
         query,
       }),
     });
-    return await res.json();
+    return {
+      queryString: query,
+      nodes: await res.json(),
+    };
   }
 );
 
@@ -46,14 +50,12 @@ const nodesSlice = createSlice({
   name: 'nodes',
   initialState,
   reducers: {
-    resetConnections(state) {
+    resetSearch(state) {
       return {
         ...state,
-        nodes: state.initialNodes,
+        nodes: state.cachedNodes,
+        queryString: '',
       };
-    },
-    setQueryString(state, action) {
-      return { ...state, queryString: action.payload };
     },
   },
   extraReducers: {
@@ -93,32 +95,36 @@ const nodesSlice = createSlice({
                 : [],
           }));
         }
-
         return selectedConnections;
       };
 
       return {
         ...state,
         nodes: insertSelectedConnection(state.nodes, selectedId.split('.')),
+        cachedNodes: insertSelectedConnection(
+          state.cachedNodes,
+          selectedId.split('.')
+        ),
         content,
         selectedId,
       };
     },
     [searchNodes.fulfilled]: (state, action) => {
+      const { nodes, queryString } = action.payload;
+      const cachedNodes = state.queryString ? state.cachedNodes : state.nodes;
+
       return {
         ...state,
-        nodes: state.nodes.filter((node) =>
-          action.payload.find(({ id }) => node.id === id)
+        nodes: cachedNodes.filter((node) =>
+          nodes.find(({ id }) => node.id === id)
         ),
+        cachedNodes,
+        queryString,
       };
     },
   },
 });
 
-export const {
-  resetConnections,
-  setSelectedNode,
-  setQueryString,
-} = nodesSlice.actions;
+export const { resetSearch, setSelectedNode } = nodesSlice.actions;
 
 export default nodesSlice.reducer;
