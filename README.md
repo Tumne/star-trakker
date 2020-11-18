@@ -52,7 +52,7 @@ yarn
 yarn start-server
 ```
 
-then in the client:
+then in the client (NOTE: building may take some time):
 
 ```
 cd client/
