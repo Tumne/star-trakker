@@ -12,6 +12,8 @@ I have built a **Start Trakker** app that solves all the following challenges:
 
 In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy 🖖
 
+## The Process
+
 With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. Early on, I quickly made sure the application worked in a few files. I coded the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware that it will need later optimization.
 
 Next I styled the app with great thought to usability and aesthetics.
