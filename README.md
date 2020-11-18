@@ -18,7 +18,7 @@ In addition, I styled the app with an outerspace like theme and included “univ
 
 With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. I quickly made sure the application worked in a few component files, coding most of the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware to later optimize and refactor.
 
-Next I styled the app with great thought to design and overall usability.
+Next I styled the app giving great thought to design and overall usability.
 
 Then I decided to move most of the state logic into a redux architecture; all the while refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase using react-redux hooks.
 
