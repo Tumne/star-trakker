@@ -28,7 +28,7 @@ Highlighting content using a nifty regex expressions that ignores any html tags 
 
 ## Further implementation:
 
-Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the titles, if this was a real app, I’d also highlight text in the node list. For larger datasets, I’d consider paginating the data in and better caching within global state.
+Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the titles, if this was a real app, I’d also highlight text in the node list. And throttle searches on key strokes. For larger datasets, I’d consider paginating the data in and better caching within global state.
 
 Other aspects of the code would need attention too;
 

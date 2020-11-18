@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  initialNodes: [],
-  nodes: [],
   cachedNodes: [],
+  nodes: [],
   content: [],
   selectedId: '',
   queryString: '',
@@ -68,7 +67,6 @@ const nodesSlice = createSlice({
 
       return {
         ...state,
-        initialNodes: nodes,
         cachedNodes: nodes,
         nodes,
       };
@@ -78,7 +76,7 @@ const nodesSlice = createSlice({
       const newConnections = connections
         ? connections.map((connectionId) => {
             return {
-              ...state.initialNodes.find((o) => o.id === connectionId),
+              ...state.cachedNodes.find((o) => o.id === connectionId),
               connections: [],
               nodeId: [selectedId, connectionId].join('.'),
             };
