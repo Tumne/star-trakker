@@ -5,7 +5,7 @@ import styles from './Search.module.scss';
 const Search = () => {
   const dispatch = useDispatch();
 
-  const handleOnChange = async (e) => {
+  const handleOnChange = (e) => {
     const queryString = e.target.value.trim();
     dispatch(queryString ? searchNodes(queryString) : resetSearch());
   };
