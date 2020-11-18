@@ -47,7 +47,7 @@ first start server:
 
 ```
 https://github.com/Tumne/Ada-fe-test.git
-cd ada-fe-test/
+cd star-trakker/
 yarn
 yarn start-server
 ```
