@@ -65,6 +65,7 @@ const nodesSlice = createSlice({
         connections: [],
         nodeId: node.id.toString(),
       }));
+
       return {
         ...state,
         initialNodes: nodes,
