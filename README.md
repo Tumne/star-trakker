@@ -24,7 +24,7 @@ Then I decided to move most of the state logic into a redux architecture; all th
 
 I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminating unnecessary api calls. Creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could also be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
 
-Highlighting content using a nifty regex expressions that ignores any html tags while still allowing multi-search functionality. DOMpurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
+Highlightied content using a nifty regex expressions that ignores any html tags while still allowing multi-search functionality. DOMpurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
 
 ## Further implementation:
 
