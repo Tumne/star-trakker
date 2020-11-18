@@ -20,7 +20,7 @@ With the limited amount of time I had between job searching and other activities
 
 Next I styled the app giving great thought to design and overall usability.
 
-Then I decided to move most of the state logic into a redux architecture; all the while refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase using react-redux hooks.
+Then I decided to move most of the state logic into a redux architecture; all the while refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase with redux hooks.
 
 I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminated unnecessary api calls. Creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could also be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
 
