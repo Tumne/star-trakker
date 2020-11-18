@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import styles from './Header.module.scss';
 
 const Header = ({ theme, onClick }) => (
@@ -41,5 +42,14 @@ const Header = ({ theme, onClick }) => (
     </div>
   </div>
 );
+
+Header.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  theme: PropTypes.string,
+};
+
+Header.defaultProps = {
+  theme: '',
+};
 
 export default Header;

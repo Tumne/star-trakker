@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSelectedNode } from '../../../state/nodes/nodesSlice';
 import styles from './Connections.module.scss';
@@ -36,6 +37,10 @@ const Connections = ({ nodes }) => {
       ) : null}
     </li>
   ));
+};
+
+Connections.propTypes = {
+  nodes: PropTypes.array.isRequired,
 };
 
 export default Connections;
