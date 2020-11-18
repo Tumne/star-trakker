@@ -10,7 +10,8 @@ I have built a **Start Trakker** app that solves all the following challenges:
 - Search and highlight content while preventing xss vulnerabilities
 - replace content with template string variables
 
-In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy 🖖
+In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy
+🖖
 
 ## The Process
 
