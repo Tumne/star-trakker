@@ -46,8 +46,8 @@ If this was a production ready app, I would eject create-react-app and tailor a 
 first start server:
 
 ```
-https://github.com/Tumne/Ada-fe-test.git
-cd ada-fe-test/
+git clone https://github.com/Tumne/star-trakker.git
+cd star-trakker/
 yarn
 yarn start-server
 ```
