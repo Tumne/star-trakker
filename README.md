@@ -4,7 +4,7 @@ _Search nodes, the final frontier_
 
 ## Captain’s log (Stardate 74328.9):
 
-I have built a **Start Trakker** app that solves all the following challenges:
+I have built a **Star Trakker** app that solves all the following challenges:
 
 - Display lists and selected content from a data tree structure
 - Search and highlight content while preventing xss vulnerabilities
