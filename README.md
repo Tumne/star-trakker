@@ -24,13 +24,13 @@ Then I decided to move most of the state logic into a redux architecture; all th
 
 I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminating unnecessary api calls. Creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could also be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
 
-Highlightied content using a nifty regex expressions that ignores any html tags while still allowing multi-search functionality. DOMpurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
+Highlighted content using a nifty regex expressions that ignores any html tags while still allowing multi-search functionality. DOMpurify library to sanitize the innerHtml was key to prevent xss attacks. Moreso, I took the liberty of removing any empty string literals text from being displayed.
 
 ## Further implementation:
 
-Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the titles, if this was a real app, I’d also highlight text in the node list. And throttle searches on key strokes. For larger datasets, I’d consider paginating the data in and better caching within global state.
+Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list connections to stay open independant of onClick's (similar to vsCode file-folder structure). Or be able to change the variables with a dropdown UI, that saves changes to the backend. The search endpoint also searches the titles, if this was a real app, I’d also highlight text in the node list. And throttle searches on key strokes. For larger datasets, I’d consider paginating the data in and better caching within global state.
 
-Other aspects of the code would need attention too;
+Other aspects of the code would need attention too:
 
 - internationalization
 - accessibility (alternative text for images, keyboard navigation, resizing text, etc),
