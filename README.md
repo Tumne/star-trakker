@@ -1,148 +1,64 @@
-# Ada Front End Test
+# Star Trakker
 
-Welcome to the Front End Developer test! The goal of this test is to allow you to prove that you can program, as well as develop and design application interfaces. In this test, we have provided an API as well as documentation for it, and you will have to build a web interface for the aforementioned API.
+_Search nodes, the final frontier_
 
-This test is inspired by problems we have run into in our work and we expect you to tackle it like any other work problem. You may use any programming language as well as your favourite editor. Feel free to google-and-stackoverflow your way to success.
+## Captain’s log (Stardate 74328.9):
 
-As for the programming challenges, we suggest you stick to the old programming mantra:
+I have built a **Start Trakker** app that solves all the following challenges: - Display lists and selected content from a data tree structure - Search and highlight content while preventing xss vulnerabilities - replace content with template string variables
 
-- Make it work
-- Make it right
-- Make it fast
+In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy 🖖
 
-The most important thing is to make it work somehow. If you then can clean it up and make it _right_, all the better. That said, we would like you to give some thought and documentation on how you would deliver your code to clients in production and let us understand the underlying assumptions of your solution. Why is this solution appropriate? How would you handle large datasets on the client? What could be potential user experience challenges in the future? How would you make this accessible? What would you change if you had more time to work on it? Please spare a few words to these assumptions and write them out; either directly as code comments or in a separate document.
+With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. Early on, I quickly made sure the application worked in a few files. I coded the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware that it will need later optimization.
 
-As for the code, don't feel bound by what is already there. Add functions and datastructures as you see fit, and delete old code with abandon if you don't find it helpful. This is your code, so write it your way!
+Next I styled the app with great thought to usability and aesthetics.
 
-The most important thing is to make your solution work somehow. If you then can clean it up and make it right, all the better. As for the code, don't feel bound by what is already there. Add functions and datastructures as you see fit, and delete old code with abandon if you don't find it helpful (as long as the unit tests pass). **If you are unsure on whether to develop enterprise-edition software to show us that you know how to build serious projects please keep in mind that we at Ada strongly value readability and simplicity.**
+Afterwards, I decided to move most of the state logic into a redux architecture, all the while refactoring components down. As opposed to using standard react-redux, connect, mapStateToProps and such, I implemented redux utilizing [Redux Toolkit](https://redux-toolkit.js.org/). Doing so proved effective as I was able to clean up the components and simplify the codebase with react-redux hooks.
 
-## The Challenges
+I developed a crafty solution to cache and replace node states upon empty searches, therefore eliminated unnecessary api calls. In addition, by creating a unique `nodeId` (parent id’s separated by dots) became useful in selecting the correct connection within the node tree. The unique `nodeId` could be used to recursively insert selected connections and traverse node connections inside of the `connection.js` component.
 
-You are working on a database-backed web-app in which you have to fix bugs and add new functionality (sounds familiar?). We have provided you with a functional backend and database that we need you to build a frontend for. Success here is in building something functional that aligns with the design direction provided while giving us an understanding of the choices you make as you build your solution.
+Highlighting content was completed using some custom util functions and nifty regex expressions that ignore any html tags while searching. Using the dompurify library to sanitize the innerHtml was key to prevent xss attacks. Furthermore, I took the liberty of removing any empty string literals text from being displayed.
 
-### Designs
+## Further implementation:
 
-Your application should look something like the sketch below.
+Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the text, if this was a real app, I’d expand the highlighting feature to the list. For larger datasets, I’d consider paginating the data in and better caching within global state (redux).
 
-![58CB6FC5-1001-43C2-A8DD-729C5CF0258B](resources/sketch.png)
+Other aspects of the code would need attention too; - internationalization - accessibility (alternative text for images, keyboard navigation, resizing text, etc), - typescript (opted out, but usually my default), - jsdoc comments everywhere (currently only in util files), - scss mixins/variables or even better styled-components - constants and enums for api endpoints and the like
 
-### Challenge 1
-
-Build a frontend component that displays information from the /nodes endpoint according to the specification outlined in the design documents.
-
-- [x] When you click on an item in the list view on the left side of the app, a space between that cell and the cell beneath it should show that `node`s `connections`.
-
-- [x] You should then be able to click on the `node`s to reveal their `connections` as well, if they exist that is.
-
-- [x] When you click on a diferent item in the list, it should close the connections that you are viewing and open up the connections for the node that you have clicked on.
-
-- [x] Any time you click on a node, it should display all of the content in the Detail View on the right side of the page.
-
-### Challenge 2
-
-- [x] Build an interactive frontend component that works with the /search end point and displays results as outlined in the design documents.
-
-- [x] In the detail view, make sure to **highlight** the search terms in the text if it's in the answer's content.
-
-- [x] _Users may have input unsafe strings to try to expose XSS vulnerabilities in our application. Make sure to render highlights and other strings in a safe and secure way._
-
-### Challenge 3
-
-- [x] Build an interactive frontend component that renders the content using template strings.
-
-- [x] Variables are represented inside of `node` content as a template string `{<idOfTheVariable>|a fallback value}`
-
-- [x] When displaying a variable, make sure to show that it's a variable value. In the image below, we can see how the variables should look embedded in text.
-
-![variable pill](resources/variable-pill-example.png)
+If this was a production ready app, I would eject create-react-app and configure accordingly, though realistically would have built the webpack from scratch. Code splitting, lazy loading sections, common chunks. Dockerfiles, env variables, deploy scripts, the whole nine.
 
 ## Getting Started
 
-### Tools to Help you get Started
-
-#### React
-
-[create react app](https://reactjs.org/docs/create-a-new-react-app.html)
-
-### API Setup and Docs
-
-It should be simple to get the API that will get your web app data up and running:
-
-1. `yarn`
-2. `yarn start-server`
-
-#### `GET /nodes`
-
-Returns a shallow list of nodes with enough data to render a sidebar
+first start server:
 
 ```
-[
-  {
-    "id": 1,
-    "title": "These are the voyages"
-  },
-  ...
-]
+https://github.com/Tumne/Ada-fe-test.git
+cd ada-fe-test/
+yarn
+yarn start-server
 ```
 
-#### `GET /nodes/:id`
-
-returns a nodes' connections to children nodes
+then in the client:
 
 ```
-[
-  {
-    "id": 1,
-    "title": "Data on friendship",
-    "connections": [
-      2, // These are ID's to other nodes
-      3,
-      ...
-    ],
-    "content": [
-      {...},
-      ...
-    ]
-  },
-  ...
-]
+cd client/
+yarn
+yarn start
 ```
 
-#### `POST /nodes/search`
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-returns search content related to a node
+## Built With
 
-```
-`POST {query: "test"}`
+- [React](https://reactjs.org/) - The JS framework used
+- [React Redux](https://react-redux.js.org/) - Official React bindings for Redux
+- [Redux Toolkit](https://redux-toolkit.js.org/) - All in one toolset for efficient Redux development
+- [css-modules](https://github.com/css-modules/css-modules) - Locally scoped sass/css modules
+- [DOMPurify](https://github.com/cure53/DOMPurify) - DOM-only XSS sanitizer for HTML
 
->>>
-[
-    {
-        "id": 2,
-        "title": "Data on friendship"
-    },
-    {
-        "id": 5,
-        "title": "Maybe Data with Beard"
-    },
-    {
-        "id": 6,
-        "title": "Borg Hails"
-    }
-]
-```
+## Authors
 
-#### `GET /variables`
+- **Nikhil Tumne** - _Developers Developers Developers_ - [Freshly Grazed](http://freshlygrazed.com/)
 
-returns all our variable data
+## License
 
-```
-[
-  {
-      "id": "74c695031a554c2ebfdb2ee123c8b4f6",
-      "name": "first",
-      "scope": "global"
-  },
-  ...
-]
-```
+This project is licensed under the MIT License - see the [LICENSE.md](https://www.mit.edu/~amini/LICENSE.md) file for details
