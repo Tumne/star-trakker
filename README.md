@@ -16,7 +16,7 @@ In addition, I styled the app with an outerspace like theme and included “univ
 
 ## The Process
 
-With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. I quickly made sure the application worked in a few component files, coding most of the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware to later optimize and refactor.
+With the limited amount of time I had between job searching and other activities, I’m pleased with the outcome. Initially, I quickly made sure the application worked in a few component files, coding most of the logic within the components themselves (api calls, useState, useEffect, prop drilling). Well aware to later optimize and refactor.
 
 Next I styled the app giving great thought to design and overall usability.
 
