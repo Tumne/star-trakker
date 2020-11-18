@@ -4,7 +4,11 @@ _Search nodes, the final frontier_
 
 ## Captain’s log (Stardate 74328.9):
 
-I have built a **Start Trakker** app that solves all the following challenges: - Display lists and selected content from a data tree structure - Search and highlight content while preventing xss vulnerabilities - replace content with template string variables
+I have built a **Start Trakker** app that solves all the following challenges:
+
+- Display lists and selected content from a data tree structure
+- Search and highlight content while preventing xss vulnerabilities
+- replace content with template string variables
 
 In addition, I styled the app with a deep space like theme and included “universalization” for most species to enjoy 🖖
 
@@ -22,7 +26,14 @@ Highlighting content was completed using some custom util functions and nifty re
 
 Overall the app is highly functional but could be expanded for better usability. For example, the user might want the list to stay open upon click (similar to vsCode file-folder structure). Or be able to change the variables in a dropdown UI, saving changes to the backend. The search endpoint also searches the text, if this was a real app, I’d expand the highlighting feature to the list. For larger datasets, I’d consider paginating the data in and better caching within global state (redux).
 
-Other aspects of the code would need attention too; - internationalization - accessibility (alternative text for images, keyboard navigation, resizing text, etc), - typescript (opted out, but usually my default), - jsdoc comments everywhere (currently only in util files), - scss mixins/variables or even better styled-components - constants and enums for api endpoints and the like
+Other aspects of the code would need attention too;
+
+- internationalization
+- accessibility (alternative text for images, keyboard navigation, resizing text, etc),
+- typescript (opted out, but usually my default),
+- jsdoc comments everywhere (currently only in util files),
+- scss mixins/variables or even better styled-components
+- constants and enums for api endpoints and the like
 
 If this was a production ready app, I would eject create-react-app and configure accordingly, though realistically would have built the webpack from scratch. Code splitting, lazy loading sections, common chunks. Dockerfiles, env variables, deploy scripts, the whole nine.
 
