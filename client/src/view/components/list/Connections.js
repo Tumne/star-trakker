@@ -18,7 +18,7 @@ const Connections = ({ nodes }) => {
           styles.card,
           selectedId === nodeId && styles.selected
         )}
-        onClick={async () => dispatch(fetchSelectedNode(nodeId))}
+        onClick={() => dispatch(fetchSelectedNode(nodeId))}
       >
         <span
           className={classnames(
