@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 2fr;
   text-align: center;
   font-family: 'TitilliumWeb';
-  background: black url(./view/assets/images/stars.png) repeat top center;
+  background: black url(../assets/images/stars.png) repeat top center;
 
   input,
   button,
@@ -72,7 +72,7 @@
   position: absolute;
   height: 100vh;
   width: 100%;
-  background: transparent url(./view/assets/images/effect.png) repeat top center;
+  background: transparent url(../assets/images/effect.png) repeat top center;
   z-index: 1;
 
   -moz-animation: move-twink-back 200s linear infinite;

@@ -1,9 +1,9 @@
 import classnames from 'classnames';
 import { useState } from 'react';
+import Details from '../components/details';
+import List from '../components/list';
 import styles from './App.module.scss';
-import Details from './view/components/details';
-import List from './view/components/list';
-import Header from './view/layouts/Header';
+import Header from './Header';
 
 const App = () => {
   const [theme, setTheme] = useState('');
