@@ -1,3 +1,11 @@
+/**
+ * Parses and replaces an array of template strings with variables tags
+ * which resemble {<idOfTheVariable>|a fallback value}
+ *
+ * @param   {array} content
+ * @param   {array} variables
+ * @return  {array}
+ */
 export const parseContentVariables = (content, variables) => {
   const replaceVariables = (item) => {
     const reg = /\{(.+?)\}/;
@@ -14,6 +22,13 @@ export const parseContentVariables = (content, variables) => {
   return content.map((o) => replaceVariables(o));
 };
 
+/**
+ * Highlights content based on a search string
+ *
+ * @param   {array} content
+ * @param   {string} searchString
+ * @return  {array}
+ */
 export const highlightContent = (content, searchString) => {
   const regexTags = '(?!([^<])*?>)(?!<script[^>]*?>)(?![^<]*?</script>|$)';
 
