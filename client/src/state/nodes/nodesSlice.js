@@ -97,11 +97,13 @@ const nodesSlice = createSlice({
         return newConnections;
       };
 
-      const nodes = insertNewConnections(state.nodes, selectedId.split('.'));
-
       const cachedNodes = insertNewConnections(
         state.cachedNodes,
         selectedId.split('.')
+      );
+
+      const nodes = cachedNodes.filter((node) =>
+        state.nodes.find(({ id }) => node.id === id)
       );
 
       return {
