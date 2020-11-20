@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { insertNewConnections } from '../../utils/nodeUtils';
 
 const initialState = {
   cachedNodes: [],
@@ -73,6 +74,7 @@ const nodesSlice = createSlice({
     },
     [fetchSelectedNode.fulfilled]: (state, action) => {
       const { connections, content, selectedId } = action.payload;
+      const selectedIdArray = selectedId.split('.');
       const newConnections = connections
         ? connections.map((connectionId) => {
             return {
@@ -83,23 +85,10 @@ const nodesSlice = createSlice({
           })
         : null;
 
-      const insertNewConnections = (currNodes, arr) => {
-        if (arr.length) {
-          const selectedId = arr.shift();
-          return currNodes.map((node) => ({
-            ...node,
-            connections:
-              node.id.toString() === selectedId
-                ? insertNewConnections(node.connections, arr)
-                : [],
-          }));
-        }
-        return newConnections;
-      };
-
       const cachedNodes = insertNewConnections(
         state.cachedNodes,
-        selectedId.split('.')
+        selectedIdArray,
+        newConnections
       );
 
       const nodes = cachedNodes.filter((node) =>
