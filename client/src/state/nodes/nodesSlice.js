@@ -121,6 +121,6 @@ const nodesSlice = createSlice({
   },
 });
 
-export const { resetSearch, setSelectedNode } = nodesSlice.actions;
+export const { resetSearch } = nodesSlice.actions;
 
 export default nodesSlice.reducer;
