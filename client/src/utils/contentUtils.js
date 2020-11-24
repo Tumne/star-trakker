@@ -41,17 +41,15 @@ export const highlightContent = (content, searchString) => {
       .sort((a, b) => b.length - a.length)
       .join('|');
 
-    return content.map(({ body, ...rest }) => {
-      return {
-        ...rest,
-        body: body
-          ? `${body} `.replace(
-              new RegExp(`(${normReq})${regexTags}`, 'gi'),
-              (match) => '<mark>' + match + '</mark>'
-            )
-          : null,
-      };
-    });
+    return content.map(({ body, ...rest }) => ({
+      ...rest,
+      body: body
+        ? `${body} `.replace(
+            new RegExp(`(${normReq})${regexTags}`, 'gi'),
+            (match) => '<mark>' + match + '</mark>'
+          )
+        : null,
+    }));
   }
 
   return content;
