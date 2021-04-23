@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import {
   highlightContent,
   parseContentVariables,
-} from '../../utils/contentUtils';
+} from '../../../utils/contentUtils';
 
 const Details = () => {
   const [details, setDetails] = useState([]);
